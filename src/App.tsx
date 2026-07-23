@@ -1,14 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
+import { authAPI } from './api/axiosInstance'
 import './App.css'
-import { Login } from './components/Login/Login'
-import { Register } from './components/Register/Register'
-import { MainPage } from './components/MainPage/MainPage'
 import { CreateMovie } from './components/CreateMovie/CreateMovie'
-import { accessToken, authAPI, refreshToken } from './api/axiosInstance'
+import { Login } from './components/Login/Login'
+import { MainPage } from './components/MainPage/MainPage'
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
+import { Register } from './components/Register/Register'
 
 function App() {
-  console.log('Access token: ', accessToken)
-  console.log('Refresh token: ', refreshToken)
   const logoutHandler = () => {
     authAPI.logout()
   }
@@ -16,10 +15,19 @@ function App() {
     <>
       <div>Hello</div>
       <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/movie' element={<CreateMovie />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/' element={
+          <ProtectedRoute>
+            <MainPage />
+          </ProtectedRoute>
+        }
+        />
+        <Route path='/movie' element={
+          <ProtectedRoute>
+            <CreateMovie />
+          </ProtectedRoute>
+        } />
       </Routes>
       <button onClick={logoutHandler}>Logout</button>
     </>

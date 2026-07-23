@@ -1,17 +1,15 @@
 import axios from "axios"
 import { useFormik } from "formik"
 import { useState } from "react"
-import { authAPI, setTokens } from "../../api/axiosInstance"
 import { useNavigate } from "react-router-dom"
+import { authAPI } from "../../api/axiosInstance"
 
 export const Register = () => {
     const [state, setState] = useState<string>('')
     const navigate = useNavigate()
     const sendRequest = async (email: string, password: string) => {
         try {
-            const response = await authAPI.register(email, password)
-            const { accessToken, refreshToken } = response.data
-            setTokens(accessToken, refreshToken)
+            await authAPI.register(email, password)
             navigate('/login')
         } catch (err: unknown) {
             if (axios.isAxiosError(err)) {
@@ -20,7 +18,6 @@ export const Register = () => {
                 setState('Something went wrong');
             }
         }
-
 
     }
     const formik = useFormik({

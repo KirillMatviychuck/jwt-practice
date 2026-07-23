@@ -17,13 +17,20 @@ type RefreshToken = string;
 export let accessToken: AccessToken = '';
 export let refreshToken: RefreshToken = '';
 
+let savedCallback: (auth: boolean) => void;
+
+export function setOnAuthChange(fn: (auth: boolean) => void) {
+    savedCallback = fn
+}
 
 function setTokens(access: AccessToken, refresh: RefreshToken) {
+    savedCallback(true)
     accessToken = access
     refreshToken = refresh
 }
 
 function clearTokens() {
+    savedCallback(false)
     accessToken = ''
     refreshToken = ''
 }

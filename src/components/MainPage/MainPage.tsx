@@ -1,11 +1,9 @@
-import { Navigate } from "react-router-dom"
-import { authAPI, moviesAPI, type GetAllMovies } from "../../api/axiosInstance"
-import { useEffect, useState } from "react"
 import axios from "axios"
+import { useEffect, useState } from "react"
+import { moviesAPI, type GetAllMovies } from "../../api/axiosInstance"
 
 export const MainPage = () => {
     const [movies, setMovies] = useState<GetAllMovies[]>([])
-    const isLoggedIn = authAPI.isLoggedIn()
 
     useEffect(() => {
         async function getAllMovies() {
@@ -24,10 +22,6 @@ export const MainPage = () => {
         }
         getAllMovies()
     }, [])
-
-    if (!isLoggedIn) {
-        return <Navigate to={'/login'} replace />
-    }
 
     return (
         <div>
