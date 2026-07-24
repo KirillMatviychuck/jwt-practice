@@ -3,7 +3,6 @@ import { useFormik } from "formik"
 import { moviesAPI } from "../../api/axiosInstance"
 
 export const CreateMovie = () => {
-    // const [state, setState] = useState<MovieType | null>(null)
     const createMovie = async (title: string, year: number) => {
         try {
             const response = await moviesAPI.createMovie(title, year)
@@ -16,8 +15,6 @@ export const CreateMovie = () => {
                 console.log(err)
             }
         }
-
-
     }
     const formik = useFormik({
         initialValues: {
@@ -25,9 +22,9 @@ export const CreateMovie = () => {
             year: '',
         },
         validate(values) {
-            const errors: { email?: string; password?: string } = {};
-            if (!values.title) errors.email = 'Title is required';
-            if (!values.year) errors.password = 'Year is required';
+            const errors: { title?: string; year?: string } = {};
+            if (!values.title) errors.title = 'Title is required';
+            if (!values.year) errors.year = 'Year is required';
             return errors;
         },
         onSubmit: values => {
@@ -44,19 +41,23 @@ export const CreateMovie = () => {
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input
-                    type="title"
+                    type="text"
+
                     {...formik.getFieldProps('title')}
                 />
                 <label htmlFor="year" />
                 <input
-                    type="year"
+                    type="number"
                     {...formik.getFieldProps('year')}
                 />
                 <button type="submit">Submit</button>
             </form>
             <div>
                 <div>Status</div>
-                <div></div>
+                <div style={{ color: 'crimson' }}>
+                    {formik.errors.title && <div>formik.errors.title</div>}ç
+                    {formik.errors.year && <div>formik.errors.year</div>}
+                </div>
             </div>
         </div>
     )
