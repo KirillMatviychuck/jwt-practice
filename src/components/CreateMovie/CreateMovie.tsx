@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useFormik } from "formik"
-import { moviesAPI } from "../../api/axiosInstance"
+import { moviesAPI } from "../../api/movieAPI"
 
 export const CreateMovie = () => {
     const createMovie = async (title: string, year: number) => {
@@ -55,8 +55,8 @@ export const CreateMovie = () => {
             <div>
                 <div>Status</div>
                 <div style={{ color: 'crimson' }}>
-                    {formik.errors.title && <div>formik.errors.title</div>}ç
-                    {formik.errors.year && <div>formik.errors.year</div>}
+                    {formik.errors.title && <div>{formik.errors.title}</div>}
+                    {formik.errors.year && <div>{formik.errors.year}</div>}
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
-import { useState, type FC, type ReactNode } from "react"
+import { useEffect, useState, type FC, type ReactNode } from "react"
 import { AuthContext } from "../lib/AuthContext"
+import { setOnAuthChange } from "../../api/tokenStorage"
 
 interface AuthProviderProps {
     children: ReactNode
@@ -7,7 +8,9 @@ interface AuthProviderProps {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
-
+    useEffect(() => {
+        setOnAuthChange(setIsAuth)
+    }, [])
     return (
         <AuthContext value={{
             isAuthenticated: isAuth,

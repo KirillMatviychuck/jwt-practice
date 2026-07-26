@@ -2,7 +2,7 @@ import axios from "axios"
 import { useFormik } from "formik"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { authAPI } from "../../api/axiosInstance"
+import { authAPI } from "../../api/authAPI"
 
 export const Register = () => {
     const [state, setState] = useState<string>('')

@@ -1,11 +1,11 @@
-import { Route, Routes } from 'react-router-dom'
-import { authAPI } from './api/axiosInstance'
-import './App.css'
-import { CreateMovie } from './components/CreateMovie/CreateMovie'
-import { Login } from './components/Login/Login'
-import { MainPage } from './components/MainPage/MainPage'
-import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
-import { Register } from './components/Register/Register'
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { CreateMovie } from './components/CreateMovie/CreateMovie';
+import { Login } from './components/Login/Login';
+import { MainPage } from './components/MainPage/MainPage';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { Register } from './components/Register/Register';
+import { authAPI } from './api/authAPI';
 
 function App() {
   const logoutHandler = () => {

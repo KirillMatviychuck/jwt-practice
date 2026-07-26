@@ -1,19 +1,18 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { authAPI, setOnAuthChange, setTokens } from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/lib/useAuth";
+import { authAPI } from "../../api/authAPI";
+import { setTokens } from "../../api/tokenStorage";
 
 export const Login = () => {
     const navigate = useNavigate()
-    const { changeAuthStatus } = useAuth()
     const [state, setState] = useState<string>('')
     const sendRequest = async (email: string, password: string) => {
         try {
             const response = await authAPI.login(email, password)
+            console.log(response)
             const { accessToken, refreshToken } = response.data
-            setOnAuthChange(changeAuthStatus)
             setTokens(accessToken, refreshToken)
             navigate('/movie')
         } catch (err: unknown) {

@@ -1,7 +1,7 @@
-import { useEffect, type FC, type ReactNode } from "react"
-import { Navigate } from "react-router-dom"
-import { setOnAuthChange } from "../../api/axiosInstance"
-import { useAuth } from "../../context/lib/useAuth"
+import { useEffect, type FC, type ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/lib/useAuth";
+import { setOnAuthChange } from "../../api/tokenStorage";
 
 interface ProtectedRouteProps {
     children: ReactNode

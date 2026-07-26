@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { moviesAPI, type GetAllMovies } from "../../api/axiosInstance"
+import { moviesAPI, type GetAllMovies } from "../../api/movieAPI"
+
 
 export const MainPage = () => {
     const [movies, setMovies] = useState<GetAllMovies[]>([])
