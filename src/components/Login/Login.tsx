@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../api/authAPI";
 import { setTokens } from "../../api/tokenStorage";
+import cls from './Login.module.css';
 
 export const Login = () => {
     const navigate = useNavigate()
@@ -46,18 +47,31 @@ export const Login = () => {
     return (
         <div>
             <div>LOGIN</div>
-            <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    {...formik.getFieldProps('email')}
-                />
-                <label htmlFor="password" />
-                <input
-                    type="password"
-                    {...formik.getFieldProps('password')}
-                />
-                <button type="submit">Log In</button>
+            <form
+                className={cls.form}
+                aria-label="login form"
+                onSubmit={formik.handleSubmit}>
+                <div className={cls.dataBlock}>
+                    <div className={cls.emailBlock}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id='email'
+                            type="email"
+                            {...formik.getFieldProps('email')}
+                        />
+                        <div className={cls.errorField}>{formik.errors.email}</div>
+                    </div>
+                    <div className={cls.passwordBlock}>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id='password'
+                            type="password"
+                            {...formik.getFieldProps('password')}
+                        />
+                        <div className={cls.errorField}>{formik.errors.password}</div>
+                    </div>
+                </div>
+                <button className={cls.button} type="submit">Log In</button>
             </form>
             <div>
                 <div>Status</div>

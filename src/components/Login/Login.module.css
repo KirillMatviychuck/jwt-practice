@@ -1,0 +1,31 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dataBlock {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.emailBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.passwordBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.errorField {
+    font-size: smaller;
+    height: 20px;
+    color: brown;
+}
+
+.button {
+    margin-top: 10px;
+}
