@@ -12,13 +12,13 @@ export const Login = () => {
     const sendRequest = async (email: string, password: string) => {
         try {
             const response = await authAPI.login(email, password)
-            console.log(response)
             const { accessToken, refreshToken } = response.data
             setTokens(accessToken, refreshToken)
             navigate('/movie')
         } catch (err: unknown) {
             if (axios.isAxiosError(err)) {
                 setState(err.response?.data ?? 'Login failed');
+
             } else {
                 console.log(err)
                 setState('Something went wrong');

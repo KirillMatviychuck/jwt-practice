@@ -4,7 +4,7 @@ import { authAPI } from './authAPI';
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://node-express-practice-production.up.railway.app',
 });
 
 instance.interceptors.request.use(function (config) {
