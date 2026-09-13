@@ -7,7 +7,6 @@ export const CreateMovie = () => {
         try {
             const response = await moviesAPI.createMovie(title, year)
             console.log(response)
-            console.log(response)
         } catch (err: unknown) {
             if (axios.isAxiosError(err)) {
                 console.log(err)

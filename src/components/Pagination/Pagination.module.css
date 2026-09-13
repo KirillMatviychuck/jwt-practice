@@ -1,0 +1,24 @@
+.pagesWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+    width: 30%;
+}
+
+.btn {
+    all: unset;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    background-color: gray;
+    cursor: pointer;
+}
+
+.activePage {
+    all: unset;
+    width: 25px;
+    height: 25px;
+    background-color: #1c1b1b;
+    color: #fff;
+    cursor: pointer;
+}

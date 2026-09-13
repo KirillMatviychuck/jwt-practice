@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import { CreateMovie } from './components/CreateMovie/CreateMovie';
 import { Login } from './components/Login/Login';
@@ -8,9 +8,14 @@ import { Register } from './components/Register/Register';
 import { authAPI } from './api/authAPI';
 
 function App() {
+  const navigate = useNavigate()
+
   const logoutHandler = () => {
     authAPI.logout()
   }
+
+  const toMainPageHandler = () => navigate('/')
+
   return (
     <>
       <div>Hello</div>
@@ -25,6 +30,7 @@ function App() {
         />
         <Route path='/movie' element={
           <ProtectedRoute>
+            <button onClick={toMainPageHandler}> To the main page</button>
             <CreateMovie />
           </ProtectedRoute>
         } />

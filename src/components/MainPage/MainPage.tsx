@@ -1,16 +1,20 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { moviesAPI, type GetAllMovies } from "../../api/movieAPI"
+import { moviesAPI, type movieItem } from "../../api/movieAPI"
+import { Pagination } from "../Pagination/Pagination"
 
 
 export const MainPage = () => {
-    const [movies, setMovies] = useState<GetAllMovies[]>([])
+    const [movies, setMovies] = useState<movieItem[]>([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
-        async function getAllMovies() {
+        async function getMovies() {
             try {
-                const response = await moviesAPI.getMovies()
-                setMovies(response.data)
+                const response = await moviesAPI.getMovies(currentPage, 5)
+                setMovies(response.data.data)
+                setTotalPages(response.data.totalPages)
 
             } catch (err) {
                 if (axios.isAxiosError(err)) {
@@ -21,12 +25,15 @@ export const MainPage = () => {
 
             }
         }
-        getAllMovies()
-    }, [])
+        getMovies()
+    }, [currentPage])
 
     return (
-        <div>
-            {movies.map(movie => <div key={movie.id}>{movie.title}</div>)}
-        </div>
+        <>
+            <div>
+                {movies.map(movie => <div key={movie.id}>{movie.title}</div>)}
+            </div>
+            <Pagination changePageSetter={setCurrentPage} totalPages={totalPages} currentPage={currentPage} />
+        </>
     )
 }
