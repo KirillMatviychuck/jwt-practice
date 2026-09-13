@@ -6,7 +6,8 @@
 }
 
 .btn {
-    all: unset;
+    border: none;
+    font: inherit;
     width: 25px;
     height: 25px;
     color: #fff;
@@ -15,7 +16,8 @@
 }
 
 .activePage {
-    all: unset;
+    border: none;
+    font: inherit;
     width: 25px;
     height: 25px;
     background-color: #1c1b1b;
