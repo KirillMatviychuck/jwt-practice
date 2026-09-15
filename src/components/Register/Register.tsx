@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { authAPI } from "../../api/authAPI"
 
-export const Register = () => {
+const Register = () => {
     const [state, setState] = useState<string>('')
     const navigate = useNavigate()
     const sendRequest = async (email: string, password: string) => {
@@ -61,3 +61,5 @@ export const Register = () => {
         </div>
     )
 }
+
+export default Register;

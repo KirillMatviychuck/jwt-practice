@@ -9,6 +9,7 @@ export const Pagination: FC<PaginationProps> = ({ changePageSetter, totalPages, 
         <div className={cls.pagesWrapper}>
             {[...new Array(pages)].map((_, index) => (
                 <button className={currentPage === index + 1 ? cls.activePage : cls.btn}
+                    aria-current="page"
                     key={index}
                     onClick={() => changePageHandler(index + 1)}
                 >

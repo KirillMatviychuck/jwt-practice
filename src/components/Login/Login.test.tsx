@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { Login } from './Login'
+import Login from './Login'
 import { MemoryRouter } from 'react-router-dom'
 import { vi } from 'vitest'
 import { authAPI } from '../../api/authAPI'

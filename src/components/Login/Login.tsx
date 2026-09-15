@@ -6,7 +6,7 @@ import { authAPI } from "../../api/authAPI";
 import { setTokens } from "../../api/tokenStorage";
 import cls from './Login.module.css';
 
-export const Login = () => {
+const Login = () => {
     const navigate = useNavigate()
     const [state, setState] = useState<string>('')
     const sendRequest = async (email: string, password: string) => {
@@ -80,3 +80,5 @@ export const Login = () => {
         </div>
     )
 }
+
+export default Login;

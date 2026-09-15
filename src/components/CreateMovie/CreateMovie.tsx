@@ -1,19 +1,54 @@
 import axios from "axios"
 import { useFormik } from "formik"
-import { moviesAPI } from "../../api/movieAPI"
+import { moviesAPI, type movieItem } from "../../api/movieAPI"
+import { startTransition, useEffect, useOptimistic, type FC } from "react"
+import { Pagination } from "../Pagination/Pagination"
+import { UserAvatar } from "../UserAvatar/UserAvatar"
 
-export const CreateMovie = () => {
-    const createMovie = async (title: string, year: number) => {
-        try {
-            const response = await moviesAPI.createMovie(title, year)
-            console.log(response)
-        } catch (err: unknown) {
-            if (axios.isAxiosError(err)) {
-                console.log(err)
-            } else {
-                console.log(err)
+const CreateMovie: FC<CreateMovieProps> = ({ currentPage, movies, setCurrentPage, setMovies, setTotalPages, totalPages }) => {
+    const [optimisticMovies, addOptimisticMovie] = useOptimistic(
+        movies,
+        (currentMovies: movieItem[], movie: movieItem) => [
+            ...currentMovies,
+            movie
+        ]
+    );
+
+    useEffect(() => {
+        async function getMovies() {
+            try {
+                const response = await moviesAPI.getMovies(currentPage, 5)
+                setMovies(response.data.data)
+                console.log(response.data.data)
+                response.data.totalPages && setTotalPages(response.data.totalPages)
+            } catch (err) {
+                if (axios.isAxiosError(err)) {
+                    console.log('Axios Error', err)
+                } else {
+                    console.log('Error', err)
+                }
             }
         }
+        getMovies()
+    }, [currentPage])
+
+    const createMovie = async (title: string, year: number) => {
+        startTransition(async () => {
+            try {
+
+                addOptimisticMovie({ id: Date.now(), title, year });
+                const response = await moviesAPI.createMovie(title, year)
+                setMovies(prev => [...prev, response.data])
+
+
+            } catch (err: unknown) {
+                if (axios.isAxiosError(err)) {
+                    console.log(err)
+                } else {
+                    console.log(err)
+                }
+            }
+        })
     }
     const formik = useFormik({
         initialValues: {
@@ -58,6 +93,25 @@ export const CreateMovie = () => {
                     {formik.errors.year && <div>{formik.errors.year}</div>}
                 </div>
             </div>
+            <div>
+                {optimisticMovies.map(movie => <div key={movie.id}>{movie.title}</div>)}
+                <Pagination changePageSetter={setCurrentPage} totalPages={totalPages} currentPage={currentPage} />
+
+            </div>
+
+            <UserAvatar />
         </div>
     )
 }
+
+
+interface CreateMovieProps {
+    movies: movieItem[];
+    currentPage: number;
+    totalPages: number;
+    setMovies: React.Dispatch<React.SetStateAction<movieItem[]>>
+    setCurrentPage: (page: number) => void
+    setTotalPages: (totalPages: number) => void
+}
+
+export default CreateMovie;
