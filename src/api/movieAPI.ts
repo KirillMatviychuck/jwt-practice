@@ -6,6 +6,12 @@ export const moviesAPI = {
     },
     createMovie(title: string, year: number) {
         return instance.post<MovieType>('/movies', { title, year })
+    },
+    addMoviePoster(id: number, file: File) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return instance.post<AddMoviePosterResponse>(`/movies/${id}/poster`, formData)
     }
 }
 
@@ -27,4 +33,13 @@ export interface GetMoviesResponse {
     currentPage: number;
     totalPages: number;
     totalItems: number;
+}
+
+export interface AddMoviePosterResponse {
+    response: {
+        id: number;
+        title: string;
+        year: number;
+        moviePoster: string;
+    };
 }

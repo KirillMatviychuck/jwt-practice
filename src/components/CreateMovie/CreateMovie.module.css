@@ -1,0 +1,19 @@
+.movieBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.movieWrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 0;
+}
+
+.movieTitle {
+    font-size: 18px;
+    font-weight: 500;
+}

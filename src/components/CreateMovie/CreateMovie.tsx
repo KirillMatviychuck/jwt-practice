@@ -1,9 +1,10 @@
 import axios from "axios"
 import { useFormik } from "formik"
-import { moviesAPI, type movieItem } from "../../api/movieAPI"
 import { startTransition, useEffect, useOptimistic, type FC } from "react"
+import { moviesAPI, type movieItem } from "../../api/movieAPI"
 import { Pagination } from "../Pagination/Pagination"
-import { UserAvatar } from "../UserAvatar/UserAvatar"
+import { PosterUpload } from "../AddMovie/PosterUpload"
+import cls from './CreateMovie.module.css'
 
 const CreateMovie: FC<CreateMovieProps> = ({ currentPage, movies, setCurrentPage, setMovies, setTotalPages, totalPages }) => {
     const [optimisticMovies, addOptimisticMovie] = useOptimistic(
@@ -93,13 +94,17 @@ const CreateMovie: FC<CreateMovieProps> = ({ currentPage, movies, setCurrentPage
                     {formik.errors.year && <div>{formik.errors.year}</div>}
                 </div>
             </div>
-            <div>
-                {optimisticMovies.map(movie => <div key={movie.id}>{movie.title}</div>)}
+            <div className={cls.movieBlock}>
+                {optimisticMovies.map(movie => (
+                    <div key={movie.id} className={cls.movieWrapper}>
+                        <div className={cls.movieTitle}>{movie.title}</div>
+                        <PosterUpload movieId={movie.id} title={movie.title} />
+                    </div>
+                ))}
                 <Pagination changePageSetter={setCurrentPage} totalPages={totalPages} currentPage={currentPage} />
 
             </div>
 
-            <UserAvatar />
         </div>
     )
 }
