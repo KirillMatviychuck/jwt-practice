@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useFormik } from "formik"
 import { startTransition, useEffect, useOptimistic, type FC } from "react"
-import { moviesAPI, type movieItem } from "../../api/movieAPI"
+import { moviesAPI, type MovieType } from "../../api/movieAPI"
 import { Pagination } from "../Pagination/Pagination"
 import { PosterUpload } from "../AddMovie/PosterUpload"
 import cls from './CreateMovie.module.css'
@@ -9,7 +9,7 @@ import cls from './CreateMovie.module.css'
 const CreateMovie: FC<CreateMovieProps> = ({ currentPage, movies, setCurrentPage, setMovies, setTotalPages, totalPages }) => {
     const [optimisticMovies, addOptimisticMovie] = useOptimistic(
         movies,
-        (currentMovies: movieItem[], movie: movieItem) => [
+        (currentMovies: MovieType[], movie: MovieType) => [
             ...currentMovies,
             movie
         ]
@@ -111,10 +111,10 @@ const CreateMovie: FC<CreateMovieProps> = ({ currentPage, movies, setCurrentPage
 
 
 interface CreateMovieProps {
-    movies: movieItem[];
+    movies: MovieType[];
     currentPage: number;
     totalPages: number;
-    setMovies: React.Dispatch<React.SetStateAction<movieItem[]>>
+    setMovies: React.Dispatch<React.SetStateAction<MovieType[]>>
     setCurrentPage: (page: number) => void
     setTotalPages: (totalPages: number) => void
 }

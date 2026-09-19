@@ -22,24 +22,17 @@ export interface MovieType {
     year: number;
 }
 
-export interface movieItem {
-    id: number;
-    title: string;
-    year: number;
-}
-
 export interface GetMoviesResponse {
-    data: movieItem[];
+    data: MovieType[];
     currentPage: number;
     totalPages: number;
     totalItems: number;
 }
 
-export interface AddMoviePosterResponse {
-    response: {
-        id: number;
-        title: string;
-        year: number;
-        moviePoster: string;
-    };
+interface MovieWithPoster extends MovieType {
+    moviePoster: string;
+}
+
+interface AddMoviePosterResponse {
+    response: MovieWithPoster;
 }

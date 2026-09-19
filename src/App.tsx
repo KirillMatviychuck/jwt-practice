@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { authAPI } from './api/authAPI';
-import type { movieItem } from './api/movieAPI';
+import type { MovieType } from './api/movieAPI';
 import './App.css';
 import { CreateMovieAsync } from './components/CreateMovie/CreateMovie.async';
 import { LoginAsync } from './components/Login/Login.async';
@@ -10,7 +10,7 @@ import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { RegisterAsync } from './components/Register/Register.async';
 
 function App() {
-  const [movies, setMovies] = useState<movieItem[]>([])
+  const [movies, setMovies] = useState<MovieType[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const navigate = useNavigate()

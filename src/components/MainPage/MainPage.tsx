@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, type FC } from "react"
-import { moviesAPI, type movieItem } from "../../api/movieAPI"
+import { moviesAPI, type MovieType } from "../../api/movieAPI"
 import { Pagination } from "../Pagination/Pagination"
 
 
@@ -35,10 +35,10 @@ const MainPage: FC<MainPageProps> = ({ currentPage, movies, setCurrentPage, setM
 }
 
 interface MainPageProps {
-    movies: movieItem[];
+    movies: MovieType[];
     currentPage: number;
     totalPages: number;
-    setMovies: React.Dispatch<React.SetStateAction<movieItem[]>>
+    setMovies: React.Dispatch<React.SetStateAction<MovieType[]>>
     setCurrentPage: (page: number) => void
     setTotalPages: (totalPages: number) => void
 }
